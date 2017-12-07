@@ -17,15 +17,15 @@ if (isset($_POST['submit']))
 	{
 		$connection = new PDO($dsn, $username, $password, $options);
 		
-		$new_user = array(
-			"topicid" => $_POST['topicid"'],
+		$new_topic = array(
+			"topicid" => $_POST['topicid'],
 			"name" => $_POST['name'],
-			"reply"  => $_POST['reply'],
+			"topic"  => $_POST['topic'],
 		);
 
 		$sql = sprintf(
 				"INSERT INTO %s (%s) values (%s)",
-				"users",
+				"topic",
 				implode(", ", array_keys($new_user)),
 				":" . implode(", :", array_keys($new_user))
 		);
@@ -45,19 +45,19 @@ if (isset($_POST['submit']))
 <?php require "templates/header.php"; 
 if (isset($_POST['submit']) && $statement) 
 { ?>
-	<blockquote><?php echo $_POST['firstname']; ?> successfully added.</blockquote>
+	<blockquote><?php echo $_POST['topic']; ?> Topic successfully added.</blockquote>
 <?php 
 } ?>
 
 <h2>Add a Topic</h2>
 
 <form method="post">
-	<label for="firstname">First Name</label>
-	<input type="text" name="firstname" id="firstname">
-	<label for="lastname">Last Name</label>
+	<label for="topicid">Topicid</label>
+	<input type="text" name="topicid" id="topicid">
+	<label for="name">Name</label>
 	<input type="text" name="lastname" id="lastname">
-	<label for="email">Email Address</label>
-	<input type="text" name="location" id="location">
+	<label for="topic">Topic</label>
+	<input type="text" name="topic" id="topic">
 	<input type="submit" name="submit" value="Submit">
 </form>
 

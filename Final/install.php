@@ -15,13 +15,13 @@ try
 		$connection = new PDO($dsn, $username, $password, $options);
 		// insert new user code will go here
 		$new_user = array(
-			"firstname" => $_POST['firstname'],
-			"lastname"  => $_POST['lastname'],
-=
+			"topicid" => $_POST['topicid"'],
+			"name" => $_POST['name'],
+			"topic"  => $_POST['topic'],
 		);
 		$sql = sprintf(
 			"INSERT INTO %s (%s) values (%s)",
-			"users",
+			"topic",
 			implode(", ", array_keys($new_user)),
 			":" . implode(", :", array_keys($new_user))
 		);

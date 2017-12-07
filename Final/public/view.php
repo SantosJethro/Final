@@ -26,14 +26,14 @@ if (isset($_POST['submit']))
 		$connection = new PDO($dsn, $username, $password, $options);
 
 		$sql = "SELECT * 
-						FROM users
-						WHERE location = :location";
+						FROM Topic
+						WHERE topic = :topic";
 
 
-		$location = $_POST['location'];
+		$topic  = $_POST['topic '];
 
 		$statement = $connection->prepare($sql);
-		$statement->bindParam(':location', $location, PDO::PARAM_STR);
+		$statement->bindParam(':topic ', $topic , PDO::PARAM_STR);
 		$statement->execute();
 
 		$result = $statement->fetchAll();
@@ -61,11 +61,9 @@ if (isset($_POST['submit']))
 		<table style = "background-color : #FF5733">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email Address</th>
-					<th>Location</th>
+					<th>topicid</th>
+					<th>Name</th>
+					<th>Topic</th>
 
 				</tr>
 			</thead>
@@ -74,10 +72,9 @@ if (isset($_POST['submit']))
 		foreach ($result as $row) 
 		{ ?>
 			<tr>
-				<td><?php echo escape($row["id"]); ?></td>
-				<td><?php echo escape($row["firstname"]); ?></td>
-				<td><?php echo escape($row["lastname"]); ?></td>
-				<td><?php echo escape($row["location"]); ?></td>
+				<td><?php echo escape($row["topicid"]); ?></td>
+				<td><?php echo escape($row["name"]); ?></td>
+				<td><?php echo escape($row["topic"]); ?></td>
 			</tr>
 		<?php 
 		} ?>
@@ -87,7 +84,7 @@ if (isset($_POST['submit']))
 	} 
 	else 
 	{ ?>
-		<blockquote>No results found for <?php echo escape($_POST['location']); ?>.</blockquote>
+		<blockquote>No results found for <?php echo escape($_POST['topic']); ?>.</blockquote>
 	<?php
 	} 
 }?> 
@@ -96,8 +93,8 @@ if (isset($_POST['submit']))
 <h2>Find user based on location</h2>
 
 <form method="post">
-	<label for="location">Location</label>
-	<input type="text" id="location" name="location">
+	<label for="topic ">Topic</label>
+	<input type="text" id="topic" name="topic">
 	<input type="submit" name="submit" value="View Results">
 </form>
 
